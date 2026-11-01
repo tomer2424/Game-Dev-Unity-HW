@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject coinPrefab;
 
-    [SerializeField] private int coinSpawnAmount;
+    private int coinSpawnAmount = 5;
 
     [SerializeField] private Color coinColor_1;
     [SerializeField] private Color coinColor_2;

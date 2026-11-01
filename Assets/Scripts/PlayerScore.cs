@@ -1,5 +1,5 @@
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerScore : MonoBehaviour
 {
@@ -42,15 +42,17 @@ public class PlayerScore : MonoBehaviour
     private void Win()
     {
         Debug.Log("you won");
+        EditorApplication.isPlaying = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(coinTag))
         {
-            Destroy(collision.gameObject);
-            AddScore(coinScript.getValue());
+            collision.enabled = false;
+            AddScore(collision.GetComponent<Coin>().getValue());
             coinsLeft--;
+            Destroy(collision.gameObject);
         }
     }
 
@@ -59,7 +61,7 @@ public class PlayerScore : MonoBehaviour
         if (collision.gameObject.CompareTag(enemyTag))
         {
             Debug.Log("you lose");
-            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            EditorApplication.isPlaying = false;
         }
     }
 }
